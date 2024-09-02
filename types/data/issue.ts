@@ -5,3 +5,9 @@ export interface IIssueData {
 	createdAt: Date;
 	updatedAt: Date;
 }
+
+export interface IIssuePayload {
+	id?: string;
+	title: string;
+	description: string;
+}
