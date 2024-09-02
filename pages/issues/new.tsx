@@ -3,8 +3,10 @@ import IssueForm from "../../components/form/IssueForm";
 import Default from "../../layouts/default";
 import { IIssuePayload } from "../../types/data/issue";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const CreateIssuePage = () => {
+	const router = useRouter();
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const onSubmit = async (payload: IIssuePayload) => {
@@ -12,8 +14,11 @@ const CreateIssuePage = () => {
 			setLoading(true);
 			const url = "http://localhost:5000/api/v1/issues";
 			const res = await axios.post(url, payload);
-			console.log("INI RES", res);
+			const data = res?.data?.data;
+			alert("Issue created");
+			router.push(`/issues/${data?.id}`);
 		} catch (err) {
+			alert(err);
 		} finally {
 			setLoading(false);
 		}

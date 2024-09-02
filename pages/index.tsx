@@ -32,16 +32,21 @@ const HomePage = () => {
 		}
 	};
 
+	useEffect(() => {
+		handleSearch();
+	}, [q]);
+
 	const clearQuery = () => {
 		setQ("");
 	};
 
 	const handleChangeQ = (val) => {
 		setQ(val);
-		handleSearch();
 	};
 
-	const handleSearch = debounce(() => fetchIssues(), 300);
+	const handleSearch = debounce(() => {
+		fetchIssues();
+	}, 500);
 
 	useEffect(() => {
 		fetchIssues();
